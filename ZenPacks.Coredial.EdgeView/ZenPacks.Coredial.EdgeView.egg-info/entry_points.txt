@@ -1,0 +1,3 @@
+[zenoss.zenpacks]
+ZenPacks.Coredial.EdgeView = ZenPacks.Coredial.EdgeView
+
