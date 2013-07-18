@@ -1,0 +1,35 @@
+<tal:block metal:define-macro="eventViewPage">
+    <html metal:use-macro="here/templates/macros/page1" >
+<!--
+        <tal:block metal:fill-slot="title">
+            <tal:block metal:define-slot="title">
+                <tal:block tal:content="here/titleOrId"/>
+            </tal:block>
+        </tal:block>
+        <tal:block metal:fill-slot="head-local">
+        <tal:block metal:define-slot="head-local"/>
+        </tal:block>
+-->
+        <tal:block metal:fill-slot="frameSlot">
+        <div id="frame">
+<!--
+            <div metal:define-slot="breadcrumbs" id="breadCrumbPane">
+               <span metal:use-macro="here/miscmacros/macros/breadCrumbs" />
+            </div>
+            <div tal:omit-tag="exists:request/cookies/newui" id="rightPane">
+                <tal:block metal:define-slot="rightPane">
+-->
+                    <div id="contentPane">
+                        <tal:block metal:define-slot="contentPane">
+                            CONTENT GOES HERE
+                        </tal:block>
+                    </div>
+<!--
+                </tal:block>
+            </div>
+-->
+        </div>
+        </tal:block>
+    </html>
+</tal:block>
+

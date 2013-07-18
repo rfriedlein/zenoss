@@ -1,0 +1,3 @@
+[zenoss.zenpacks]
+ZenPacks.Coredial.fping = ZenPacks.Coredial.fping
+
