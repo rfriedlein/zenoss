@@ -112,12 +112,15 @@ wget -N http://superb-dca2.dl.sourceforge.net/project/zenoss/zenoss-4.2/zenoss-4
 rpm2cpio zenoss_core-4.2.4.el6.x86_64.rpm | sudo cpio -ivd ./opt/zenoss/packs/*.*
 cp /home/zenoss/rpm/opt/zenoss/packs/*.egg /usr/local/zenoss/ZenPacks/.
 cp /home/zenoss/zenoss424-srpm_install/zenpack-helper.sh /usr/local/zenoss/ZenPacks/.
+cp /home/zenoss/zenoss424-srpm_install/coredial-zenpacks.sh /usr/local/zenoss/ZenPacks/.
 cd /home/zenoss
 git clone https://github.com/rfriedlein/zenoss
 sleep 1m
 cp -R /home/zenoss/zenoss/ZenPacks/* /usr/local/zenoss/ZenPacks/.
 chown -R zenoss:zenoss /usr/local/zenoss/ZenPacks
 su - zenoss -c "cd /usr/local/zenoss/ZenPacks && /bin/sh zenpack-helper.sh"
+sleep 1m
+su - zenoss -c "cd /usr/local/zenoss/ZenPacks && /bin/sh coredial-zenpacks.sh"
 easy_install readline
 
 # Post Install Tweaks
@@ -136,10 +139,10 @@ echo 'watchdog True' >> $ZENHOME/etc/zenwinperf.conf
 cp /home/zenoss/zenoss424-srpm_install/DataRoot.py /usr/local/zenoss/Products/ZenModel/
 cp /home/zenoss/zenoss424-srpm_install/viewGraphReport.pt /usr/local/zenoss/Products/ZenModel/skins/zenmodel/
 cp /home/zenoss/zenoss424-srpm_install/viewPerformanceDetail.pt /usr/local/zenoss/Products/ZenModel/skins/zenmodel/
-cp /home/zenoss/zenoss424-srpm_install/zenpack-removal.py /usr/local/zenoss/bin/
-co /home/zenoss/zenoss424-srpm_install/zenoss-alive.sh
+cp /home/zenoss/zenoss424-srpm_install/zenpack-remove.py /usr/local/zenoss/bin/
+cp /home/zenoss/zenoss424-srpm_install/zenoss-alive.sh /usr/local/zenoss/bin/
 chown zenoss:zenoss /usr/local/zenoss/bin/zenoss-alive.sh
-chown zenoss:zenoss /usr/local/zenoss/bin/zenpack-removal.py
+chown zenoss:zenoss /usr/local/zenoss/bin/zenpack-remove.py
 chown -R zenoss:zenoss /usr/local/zenoss/Products/
 ln -s /usr/bin/fping /usr/sbin/fping
 mkdir /var/log/zenoss
@@ -154,6 +157,11 @@ cpan install LWP::UserAgent
 a2enmod ssl
 a2enmod proxy
 a2enmod cgi
+cd /usr/local/zenoss/bin/
+wget -N https://raw.github.com/hydruid/zenoss/master/core-autodeploy/4.2.4/misc/secure_zenoss_ubuntu.sh
+chown -R zenoss:zenoss $ZENHOME
+chmod 0700 /usr/local/zenoss/bin/secure_zenoss_ubuntu.sh
+su -l -c /usr/local/zenoss/bin/secure_zenoss_ubuntu.sh
 
 # End of Script Message
 FINDIP=`ifconfig | grep 'inet addr:'| grep -v '127.0.0.1' | cut -d: -f2 | awk '{ print $1}'`
