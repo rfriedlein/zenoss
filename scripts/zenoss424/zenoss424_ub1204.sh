@@ -109,8 +109,8 @@ wget -N http://superb-dca2.dl.sourceforge.net/project/zenoss/zenoss-4.2/zenoss-4
 rpm2cpio zenoss_core-4.2.4.el6.x86_64.rpm | sudo cpio -ivd ./opt/zenoss/packs/*.*
 cp /home/zenoss/rpm/opt/zenoss/packs/*.egg /usr/local/zenoss/ZenPacks/.
 cd /usr/local/zenoss/ZenPacks
-wget -N "https://github.com/rfriedlein/zenoss/blob/master/scripts/zenoss424/zenpack-helper.sh"
-wget -N "https://github.com/rfriedlein/zenoss/blob/master/scripts/zenoss424/coredial-zenpacks.sh"
+wget -N "https://raw.github.com/rfriedlein/zenoss/blob/master/scripts/zenoss424/zenpack-helper.sh"
+wget -N "https://raw.github.com/rfriedlein/zenoss/blob/master/scripts/zenoss424/coredial-zenpacks.sh"
 chown zenoss:zenoss /usr/local/zenoss/ZenPacks/*.sh
 chmod +x /usr/local/zenoss/ZenPacks/*.sh
 su - zenoss -c "cd /usr/local/zenoss/ZenPacks && /bin/sh zenpack-helper.sh"
@@ -138,8 +138,8 @@ cp /home/zenoss/zenoss424-srpm_install/viewPerformanceDetail.pt /usr/local/zenos
 chown -R zenoss:zenoss /usr/local/zenoss/Products/
 cd /usr/local/zenoss/bin/
 wget -N https://raw.github.com/hydruid/zenoss/master/core-autodeploy/4.2.4/misc/secure_zenoss_ubuntu.sh
-wget -N https://github.com/rfriedlein/zenoss/blob/master/scripts/zenoss424/zenoss-alive.sh
-wget -N https://github.com/rfriedlein/zenoss/blob/master/scripts/zenpack-remove.py
+wget -N https://raw.github.com/rfriedlein/zenoss/blob/master/scripts/zenoss424/zenoss-alive.sh
+wget -N https://raw.github.com/rfriedlein/zenoss/blob/master/scripts/zenpack-remove.py
 chown -R zenoss:zenoss $ZENHOME
 chmod 0700 /usr/local/zenoss/bin/secure_zenoss_ubuntu.sh
 chmod 0700 /usr/local/zenoss/bin/zenoss-alive.sh
