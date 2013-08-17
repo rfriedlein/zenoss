@@ -1,4 +1,5 @@
-#!/bin/bash            #######################################################
+#!/bin/bash            
+#######################################################
 # Version: 03 Stable                                 #
 #  Status: Functional                                 # 
 #   Notes: Updated code to stable level               #
