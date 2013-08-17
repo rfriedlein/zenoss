@@ -1,8 +1,19 @@
 #!/bin/bash
 #######################################################
-# Version: 01c                                        #
+# Version: 01                                         #
 #######################################################
-
+ZENHOME=/usr/local/zenoss
+export ZENHOME=/usr/local/zenoss
+PYTHONPATH=/usr/local/zenoss/lib/python
+PATH=/usr/local/zenoss/bin:$PATH
+INSTANCE_HOME=$ZENHOME
+/usr/local/zenoss/bin/zenoss start
+cd /home/zenoss
+git clone https://github.com/rfriedlein/zenoss
+sleep 1m
+cp -R /home/zenoss/zenoss/ZenPacks/* /usr/local/zenoss/ZenPacks/.
+chown -R zenoss:zenoss /usr/local/zenoss/ZenPacks
+cd /home/zenoss/zenoss/ZenPacks
 wget "http://wiki.zenoss.org/download/zenpacks/ZenPacks.zenoss.AWS/2.0.0/ZenPacks.zenoss.AWS-2.0.0.egg"
 git clone git://github.com/epuzanov/ZenPacks.community.CiscoEnvMon.git
 git clone git://github.com/Darkemon/ZenPacks.Darkemon.ZenCustomMap.git
@@ -18,7 +29,7 @@ git clone git://github.com/Hackman238/ZenPacks.SteelHouseLabs.EnhancedEthernetCs
 git clone git://github.com/jcurry/ZenPacks.ZenSystems.ApcPdu.git
 sleep 1m
 /usr/local/zenoss/bin/zenoss restart
-sleep 1m
+sleep 5m
 zenpack --link --install ZenPacks.Coredial.Asterisk14
 zenpack --link --install ZenPacks.Coredial.Asterisk18
 zenpack --link --install ZenPacks.Coredial.Baytech

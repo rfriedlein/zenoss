@@ -1,6 +1,5 @@
-#!/bin/bash
-#######################################################
-# Version: 02a Stable                                 #
+#!/bin/bash            #######################################################
+# Version: 03 Stable                                 #
 #  Status: Functional                                 # 
 #   Notes: Updated code to stable level               #
 #  Zenoss: Core 4.2.4 & ZenPacks                      #
@@ -39,9 +38,6 @@ debconf-set-selections
 echo debconf shared/accepted-oracle-license-v1-1 seen true | \
 debconf-set-selections
 apt-get -y install python-software-properties
-echo | add-apt-repository ppa:webupd8team/java
-apt-get update
-apt-get -y install rpm2cpio fping jwhois rrdtool sendmail htop vim snmp snmpd rabbitmq-server nagios-plugins erlang subversion git autoconf swig unzip zip g++ libssl-dev maven libmaven-compiler-plugin-java build-essential libxml2-dev libxslt1-dev libldap2-dev libsasl2-dev oracle-java7-installer libsnmp-base snmp-mibs-downloader libmysqlclient-dev python-twisted python-gnutls python-twisted-web python-samba libsnmp-base snmp-mibs-downloader bc memcached libncurses5 libncurses5-dev libreadline6-dev libreadline6 librrd-dev python-setuptools python-dev
 export DEBIAN_FRONTEND=noninteractive
 apt-get -y install mysql-server mysql-client mysql-common
 mysql -u root -e "show databases;" > /tmp/mysql.txt 2>> /tmp/mysql.txt
@@ -111,16 +107,15 @@ cd /home/zenoss/rpm
 wget -N http://superb-dca2.dl.sourceforge.net/project/zenoss/zenoss-4.2/zenoss-4.2.4/zenoss_core-4.2.4.el6.x86_64.rpm
 rpm2cpio zenoss_core-4.2.4.el6.x86_64.rpm | sudo cpio -ivd ./opt/zenoss/packs/*.*
 cp /home/zenoss/rpm/opt/zenoss/packs/*.egg /usr/local/zenoss/ZenPacks/.
-cp /home/zenoss/zenoss424-srpm_install/zenpack-helper.sh /usr/local/zenoss/ZenPacks/.
-cp /home/zenoss/zenoss424-srpm_install/coredial-zenpacks.sh /usr/local/zenoss/ZenPacks/.
-cd /home/zenoss
-git clone https://github.com/rfriedlein/zenoss
-sleep 1m
-cp -R /home/zenoss/zenoss/ZenPacks/* /usr/local/zenoss/ZenPacks/.
-chown -R zenoss:zenoss /usr/local/zenoss/ZenPacks
+cd /usr/local/zenoss/ZenPacks
+wget -N "https://github.com/rfriedlein/zenoss/blob/master/scripts/zenoss424/zenpack-helper.sh"
+wget -N "https://github.com/rfriedlein/zenoss/blob/master/scripts/zenoss424/coredial-zenpacks.sh"
+chown zenoss:zenoss /usr/local/zenoss/ZenPacks/*.sh
+chmod +x /usr/local/zenoss/ZenPacks/*.sh
 su - zenoss -c "cd /usr/local/zenoss/ZenPacks && /bin/sh zenpack-helper.sh"
-sleep 1m
+sleep 5m
 su - zenoss -c "cd /usr/local/zenoss/ZenPacks && /bin/sh coredial-zenpacks.sh"
+sleep 5m
 easy_install readline
 
 # Post Install Tweaks
@@ -139,28 +134,15 @@ echo 'watchdog True' >> $ZENHOME/etc/zenwinperf.conf
 cp /home/zenoss/zenoss424-srpm_install/DataRoot.py /usr/local/zenoss/Products/ZenModel/
 cp /home/zenoss/zenoss424-srpm_install/viewGraphReport.pt /usr/local/zenoss/Products/ZenModel/skins/zenmodel/
 cp /home/zenoss/zenoss424-srpm_install/viewPerformanceDetail.pt /usr/local/zenoss/Products/ZenModel/skins/zenmodel/
-cp /home/zenoss/zenoss424-srpm_install/zenpack-remove.py /usr/local/zenoss/bin/
-cp /home/zenoss/zenoss424-srpm_install/zenoss-alive.sh /usr/local/zenoss/bin/
-chown zenoss:zenoss /usr/local/zenoss/bin/zenoss-alive.sh
-chown zenoss:zenoss /usr/local/zenoss/bin/zenpack-remove.py
 chown -R zenoss:zenoss /usr/local/zenoss/Products/
-ln -s /usr/bin/fping /usr/sbin/fping
-mkdir /var/log/zenoss
-touch /var/log/zenoss/aliveornot.log
-chown -R zenoss:zenoss /var/log/zenoss/
-cpan install YAML
-cpan install Time::ParseDate
-cpan install Compress::Zlib
-cpan install MIME::Base64::URLSafe
-cpan install CGI
-cpan install LWP::UserAgent
-a2enmod ssl
-a2enmod proxy
-a2enmod cgi
 cd /usr/local/zenoss/bin/
 wget -N https://raw.github.com/hydruid/zenoss/master/core-autodeploy/4.2.4/misc/secure_zenoss_ubuntu.sh
+wget -N https://github.com/rfriedlein/zenoss/blob/master/scripts/zenoss424/zenoss-alive.sh
+wget -N https://github.com/rfriedlein/zenoss/blob/master/scripts/zenpack-remove.py
 chown -R zenoss:zenoss $ZENHOME
 chmod 0700 /usr/local/zenoss/bin/secure_zenoss_ubuntu.sh
+chmod 0700 /usr/local/zenoss/bin/zenoss-alive.sh
+chmod 0700 /usr/local/zenoss/bin/zenpack-remove.py
 su -l -c /usr/local/zenoss/bin/secure_zenoss_ubuntu.sh
 
 # End of Script Message
