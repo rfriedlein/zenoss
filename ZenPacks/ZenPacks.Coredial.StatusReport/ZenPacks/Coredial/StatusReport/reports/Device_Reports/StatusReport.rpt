@@ -1,0 +1,51 @@
+<tal:block tal:define="
+	objects python:here.getDmdRoot('Devices').getSubDevices();
+	tableName string: allmonitoredcomps;
+	batch python:here.ZenTableManager.getBatch(tableName,objects);
+	exportFields python:[('id','Device'),   
+			     ('getStatusString','Status')];">
+<tal:block metal:use-macro="here/reportMacros/macros/exportableReport">
+<tal:block metal:fill-slot="report">
+
+<tal:block metal:use-macro="here/templates/macros/page1">
+<tal:block metal:fill-slot="breadCrumbPane">
+    <span metal:use-macro="here/miscmacros/macros/reportBreadCrumbsList"/>    
+</tal:block>
+<tal:block metal:fill-slot="contentPane">
+	
+<form method="POST" tal:attributes="action request/URL;"
+			tal:define="tabletitle string:Status devices;
+                        showfilterbox python:True;
+						tblcolspan string:5">
+<tal:block metal:use-macro="here/zenuimacros/macros/zentable">
+<tal:block metal:fill-slot="zentablecontents">
+
+    <tr>
+        <th tal:replace="structure python:here.ZenTableManager.getTableHeader(
+                            tableName,'hostname','Device')"/>
+        <th tal:replace="structure python:here.ZenTableManager.getTableHeader(
+                            tableName,'getStatus','Status')"/>
+    </tr>
+    <tr tal:repeat="comp batch">
+        <td class="tablevalues" 
+          tal:content="structure comp/getDeviceLink"/>
+        <td tal:define="status comp/getStatus"
+            tal:attributes="class python:comp.getStatusCssClass(status)"
+            tal:content="python:comp.convertStatus(status)"/>
+    </tr>
+    <tr>
+        <td colspan="5" class="tableheader" align='center'>
+        <form metal:use-macro="here/zenTableNavigation/macros/navtool"/>
+        </td>
+    </tr>
+
+</tal:block>
+</tal:block>
+</form>
+
+</tal:block>
+</tal:block>
+
+</tal:block>
+</tal:block>
+</tal:block>

@@ -2,12 +2,7 @@
 #######################################################
 # Version: 01                                         #
 #######################################################
-ZENHOME=/usr/local/zenoss
-export ZENHOME=/usr/local/zenoss
-PYTHONPATH=/usr/local/zenoss/lib/python
-PATH=/usr/local/zenoss/bin:$PATH
-INSTANCE_HOME=$ZENHOME
-/usr/local/zenoss/bin/zenoss start
+
 cd /home/zenoss
 git clone https://github.com/rfriedlein/zenoss
 sleep 1m
@@ -28,8 +23,6 @@ git clone git://github.com/zenoss/ZenPacks.SCC.ShowGraphPortlet.git
 git clone git://github.com/Hackman238/ZenPacks.SteelHouseLabs.EnhancedEthernetCsmacd.git
 git clone git://github.com/jcurry/ZenPacks.ZenSystems.ApcPdu.git
 sleep 1m
-/usr/local/zenoss/bin/zenoss restart
-sleep 5m
 zenpack --link --install ZenPacks.Coredial.Asterisk14
 zenpack --link --install ZenPacks.Coredial.Asterisk18
 zenpack --link --install ZenPacks.Coredial.Baytech
