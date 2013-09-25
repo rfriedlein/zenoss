@@ -3,7 +3,7 @@
 # Version: 02c                                        #
 #  Status: Functional                                 #
 #   Notes: Updated download links                     #
-#  Zenoss: Core 4.2.4 & ZenPacks (v1897)              #
+#  Zenoss: Core 4.2.4 (v1897)              #
 #      OS: Ubuntu 12.04.2 x86_64                      #
 #######################################################
 
