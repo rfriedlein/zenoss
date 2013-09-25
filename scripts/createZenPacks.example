@@ -1,0 +1,16 @@
+Example
+python createZenPack.py -p "ZenPacks.Allen.ServerPacks" -a "Rob Friedlein" -v "0.1" -r "/Server/Linux/"
+
+
+Another Example, with the unique option and verbose option.
+python createZenPack.py -p "ZenPacks.Allen.Test1" -a "Rob Friedlein" -v "0.1" -u -V
+
+
+Another Example…
+python createZenPack.py --listHPTemperatureSensorsZenPacks.Allen.Test1ZenPacks.Allen.FullZenPacks.Allen.Tomcat
+
+
+Help OutPut…
+python createZenPack.py -husage: createZenPack.py  --packname=ZenPackName --author=name --version=1.0
+
+options: -h, --help            show this help message and exit -p ZPACKNAME,         --packname=ZPACKNAME

@@ -67,12 +67,12 @@ su - root -c "sed -i 's:# configure to generate the uplevel mkzenossinstance.sh 
 chown -R zenoss:zenoss $ZENHOME
 
 # Install Zenoss Core Zenpacks
-mkdir $INSTALLDIR/ZenPacks && cd $INSTALLDIR/ZenPacks
-wget -N http://hivelocity.dl.sourceforge.net/project/zenoss/zenoss-4.2/zenoss-4.2.4/4.2.4-1897/zenoss_core-4.2.4-1897.el6.x86_64.rpm -P $INSTALLDIR/ZenPacks
-rpm2cpio zenoss_core-4.2.4-1897.el6.x86_64.rpm | sudo cpio -ivd ./opt/zenoss/packs/*.*
-wget -N https://raw.github.com/hydruid/zenoss/master/core-autodeploy/4.2.4/misc/zenpack-helper.sh -P $INSTALLDIR/ZenPacks/opt/zenoss/packs
-chown -R zenoss:zenoss /home/zenoss
-su - zenoss -c "cd $INSTALLDIR/ZenPacks/opt/zenoss/packs && /bin/sh zenpack-helper.sh"
+#mkdir $INSTALLDIR/ZenPacks && cd $INSTALLDIR/ZenPacks
+#wget -N http://hivelocity.dl.sourceforge.net/project/zenoss/zenoss-4.2/zenoss-4.2.4/4.2.4-1897/zenoss_core-4.2.4-1897.el6.x86_64.rpm -P $INSTALLDIR/ZenPacks
+#rpm2cpio zenoss_core-4.2.4-1897.el6.x86_64.rpm | sudo cpio -ivd ./opt/zenoss/packs/*.*
+#wget -N https://raw.github.com/hydruid/zenoss/master/core-autodeploy/4.2.4/misc/zenpack-helper.sh -P $INSTALLDIR/ZenPacks/opt/zenoss/packs
+#chown -R zenoss:zenoss /home/zenoss
+#su - zenoss -c "cd $INSTALLDIR/ZenPacks/opt/zenoss/packs && /bin/sh zenpack-helper.sh"
 easy_install readline
 
 # Post Install Tweaks
