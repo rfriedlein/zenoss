@@ -80,9 +80,6 @@ ZenPacks/Coredial/xmppBot/reports/Example_Reports/Example_Report.rpt.example
 ZenPacks/Coredial/xmppBot/reports/plugins/example_plugin.py
 ZenPacks/Coredial/xmppBot/services/ExampleConfigService.py
 ZenPacks/Coredial/xmppBot/services/__init__.py
-ZenPacks/Coredial/xmppBot/skins/__init__.py
-ZenPacks/Coredial/xmppBot/skins/ZenPacks.Coredial.xmppBot/__init__.py
-ZenPacks/Coredial/xmppBot/skins/ZenPacks.Coredial.xmppBot/placeholder.txt
 ZenPacks/Coredial/xmppBot/tests/__init__.py
 ZenPacks/Coredial/xmppBot/tests/testExample.py
 ZenPacks/Coredial/xmppBot/zep/actions.json.example
